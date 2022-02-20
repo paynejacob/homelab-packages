@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "ring-mqtt.fullname" . }}
+  name: {{ template "ring-mqtt.name" . }}
   labels:
 {{ include "ring-mqtt.labels.standard" . | indent 4 }}
 spec:
@@ -19,13 +19,13 @@ spec:
       volumes:
       - name: config
         secret:
-          secretName: {{ template "ring-mqtt.fullname" . }}
+          secretName: {{ template "ring-mqtt.name" . }}
           items:
             - key: config.json
               path: config.json
-      - name: {{ template "ring-mqtt.fullname" . }}
+      - name: {{ template "ring-mqtt.name" . }}
         persistentVolumeClaim:
-          claimName: {{ template "ring-mqtt.fullname" . }}
+          claimName: {{ template "ring-mqtt.name" . }}
       containers:
         - name: {{ .Chart.Name }}
           image: {{ template "ring-mqtt.image" . }}
@@ -35,6 +35,6 @@ spec:
               subPath: config.json
               name: config
             - mountPath: /data
-              name: {{ template "ring-mqtt.fullname" . }}
+              name: {{ template "ring-mqtt.name" . }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}

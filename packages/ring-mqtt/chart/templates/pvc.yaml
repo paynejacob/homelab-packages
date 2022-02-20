@@ -2,9 +2,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ template "ring-mqtt.fullname" . }}
+  name: {{ template "ring-mqtt.name" . }}
   labels:
 {{ include "ring-mqtt.labels.standard" . | indent 4 }}
+    "helm.sh/hook": pre-install
 spec:
   storageClassName: {{ .Values.persistence.storageClassName }}
   accessModes:

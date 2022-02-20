@@ -1,1 +1,1 @@
-FROM tsightler/ring-mqtt:4.8.5
+FROM tsightler/ring-mqtt:4.9.1

@@ -9,7 +9,6 @@ image:
 
 persistence:
   enabled: true
-  existingClaim: ""
   storageClassName: ""
   accessMode: "ReadWriteMany"
   size: "10Mi"
