@@ -31,7 +31,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
             - secretRef:
-                name: {{ template "zigbee2mqtt.name" . }}
+                name: {{ template "zigbee2mqtt.name" . }}-network-key
           volumeMounts:
             - mountPath: /dev/ttyACM0
               name: device
