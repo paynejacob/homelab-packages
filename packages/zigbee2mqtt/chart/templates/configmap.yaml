@@ -17,3 +17,6 @@ data:
       port: {{ .Values.device }}
 
     homeassistant: true
+
+    advanced:
+      network_key: {{ .Values.network_key }}

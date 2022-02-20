@@ -6,6 +6,7 @@ image:
 
 mqtt_url: ""
 device: /dev/ttyACM0
+network_key: ""
 
 resources: {}
 nodeSelector: {}
