@@ -8,5 +8,5 @@ mqtt_url: ""
 device: /dev/ttyACM0
 
 resources: {}
-
 nodeSelector: {}
+tolerations: {}
