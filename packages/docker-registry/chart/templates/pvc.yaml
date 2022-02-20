@@ -5,6 +5,7 @@ metadata:
   name: {{ template "docker-registry.name" . }}
   labels:
 {{ include "docker-registry.labels.standard" . | indent 4 }}
+    "helm.sh/hook": pre-install
 spec:
   storageClassName: {{ .Values.persistence.storageClassName }}
   accessModes:

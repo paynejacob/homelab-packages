@@ -14,7 +14,6 @@ service:
 
 persistence:
   enabled: true
-  existingClaim: ""
   storageClassName: "ssd"
   accessMode: "ReadWriteMany"
   size: "50Gi"
