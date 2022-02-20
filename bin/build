@@ -10,7 +10,7 @@ function buildImage() {
 
     image_tag="ghcr.io/paynejacob/homelab-packages/$package:$version"
 
-    docker build -t "$image_tag" .
+    docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --tag "$image_tag" .
 
     echo "$image_tag" >> "$build_path/images.txt"
 }
