@@ -1,0 +1,12 @@
+# Default values for zigbee2mqtt.
+
+image:
+  repository: ghcr.io/paynejacob/homelab-packages/zigbee2mqtt
+  pullPolicy: Always
+
+mqtt_url: ""
+device: /dev/ttyACM0
+
+resources: {}
+
+nodeSelector: {}

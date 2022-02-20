@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "zigbee2mqtt.name" . }}
+  labels:
+{{ include "zigbee2mqtt.labels.standard" . | indent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "zigbee2mqtt.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "zigbee2mqtt.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      volumes:
+        - name: udev
+          hostPath:
+            path: /run/udev
+        - name: device
+          hostPath:
+            path: /dev/ttyACM0
+        - name: configuration
+          configMap:
+            name: {{ template "zigbee2mqtt.name" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ template "zigbee2mqtt.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: {{ template "zigbee2mqtt.name" . }}
+          volumeMounts:
+            - mountPath: /dev/ttyACM0
+              name: device
+            - mountPath: /run/udev
+              name: udev
+              readOnly: true
+            - mountPath: /app/data
+              name: configuration
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}

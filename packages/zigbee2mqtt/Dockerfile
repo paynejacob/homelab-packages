@@ -1,0 +1,1 @@
+FROM koenkk/zigbee2mqtt:1.23.0
