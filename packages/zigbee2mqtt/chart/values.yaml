@@ -1,7 +1,8 @@
 # Default values for zigbee2mqtt.
 
 image:
-  repository: ghcr.io/paynejacob/homelab-packages/zigbee2mqtt
+  repository: koenkk/zigbee2mqtt
+  tag: 1.23.0
   pullPolicy: Always
 
 mqtt_url: ""
@@ -11,3 +12,9 @@ network_key: ""
 resources: {}
 nodeSelector: {}
 tolerations: []
+
+persistence:
+  enabled: true
+  storageClassName: ""
+  accessMode: "ReadWriteMany"
+  size: "10Mi"

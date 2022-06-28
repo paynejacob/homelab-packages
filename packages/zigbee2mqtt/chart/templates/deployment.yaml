@@ -25,18 +25,26 @@ spec:
         - name: configuration
           configMap:
             name: {{ template "zigbee2mqtt.name" . }}
+        - name: data
+          hostPath:
+            path: /etc/zigbee2mqtt
       containers:
         - name: {{ .Chart.Name }}
           image: {{ template "zigbee2mqtt.image" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            privileged: true
           volumeMounts:
             - mountPath: /dev/ttyACM0
               name: device
             - mountPath: /run/udev
               name: udev
               readOnly: true
-            - mountPath: /app/data
+            - mountPath: /app/configuration.yaml
               name: configuration
+              subPath: configuration.yaml
+            - mountPath: /app/data
+              name: data
           resources:
 {{ toYaml .Values.resources | indent 12 }}
       nodeSelector:
